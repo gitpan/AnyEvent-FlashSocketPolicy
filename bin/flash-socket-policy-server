@@ -1,0 +1,36 @@
+#!perl
+use warnings;
+use strict;
+use Getopt::Long;
+use Pod::Usage;
+use lib './lib';
+use AnyEvent::FlashSocketPolicy;
+
+GetOptions(
+    'domain-policy=s' => \my $domain_policy,
+    'domain=s'        => \my $domain,
+    'to-ports=s'      => \my $to_ports,
+    'port=i'          => \my $port,
+    'h|help'          => \my $help,
+) or pod2usage();
+
+pod2usage() unless $domain_policy || $domain || $to_ports;
+pod2usage() if $help;
+
+my $server = AnyEvent::FlashSocketPolicy->new(
+    permitted_cross_domain_policies => $domain_policy,
+    domain                          => $domain,
+    to_ports                        => $to_ports,
+    port                            => $port || 843,
+);
+
+$server->run;
+
+__END__
+
+=head1 SYNOPSIS
+
+    % flash-socket-policy-server --domain-policy=master-only \
+    % --domain='*' \
+    % --to-ports=500
+
