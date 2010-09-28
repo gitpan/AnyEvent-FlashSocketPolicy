@@ -32,4 +32,4 @@ resources:
   homepage: http://github.com/keroyonn/p5-AnyEvent-FlashSocketPolicy/tree
   license: http://dev.perl.org/licenses/
   repository: git://github.com/keroyonn/p5-AnyEvent-FlashSocketPolicy.git
-version: 0.01_1
+version: 0.02
