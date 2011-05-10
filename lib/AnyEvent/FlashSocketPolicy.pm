@@ -17,7 +17,7 @@ use Try::Tiny;
 # TODO: ログの生成(不正なリクエストヘッダ。アクセス元IPアドレス)
 
 use 5.008008;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use constant POLICY_REQUEST => "<policy-file-request/>\0";
 use constant DEBUG          => $ENV{FLASH_SOCKET_POLICY_DEBUG} || 0;
@@ -99,6 +99,7 @@ sub _create_accept_handler {
             $self->_write($sock)->cb(
                 sub {
                     shutdown $sock, 1;
+                    close $sock;
                     local $@;
                     eval { $_[0]->recv; 1 } or croak 'die...';
                 }
@@ -121,6 +122,7 @@ sub _write {
     my($self, $sock) = @_;
     my $ret = AE::cv;
     my $handle = AnyEvent::Handle->new( fh => $sock );
+    
     $handle->on_error(
         sub {
             my $err = $_[2];
@@ -177,7 +179,7 @@ AnyEvent::FlashSocketPolicy - Asynchronous socket policy file server for a flash
 
 =head1 DESCRIPTION
 
-AnyEvent::FlashSocketPolicy is A simple Asynchronous socket policy file server with AnyEvent::Socket.
+AnyEvent::FlashSocketPolicy is a simple asynchronous socket policy file server with AnyEvent::Socket.
 
 It is faster than adobe's one which using inetd, and flexibly customizable.
 

@@ -1,5 +1,9 @@
 Revision history for Perl extension AnyEvent::FlashSocketPolicy
 
+0.03    Wed May 11 07:11:00 2011
+        - fixed Makefile.PL (adding build_requires)
+        - fixed the conneciton closing bug
+
 0.02    Tue Sep 28 14:28:00 2010
         - fixed Makefile.PL (adding build_requires)
 

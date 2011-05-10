@@ -19,6 +19,7 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 inc/Perl6/Slurp.pm
 inc/Pod/Markdown.pm
+inc/Test/Exception.pm
 inc/Test/More.pm
 inc/Test/TCP.pm
 lib/AnyEvent/FlashSocketPolicy.pm
